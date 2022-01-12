@@ -9,10 +9,12 @@ require('dotenv/config')
 app.use(cors());
 app.use(bodyParser.json());
 const postsRoute = require('./routes/posts');
-const cartRoute = require('./routes/cart')
+const cartRoute = require('./routes/cart');
+const productRoute = require('./routes/product');
 
 app.use('/posts', postsRoute)
 app.use('/cart',cartRoute)
+app.use('/product',productRoute)
 
 app.get('/',(req,res) => {
     res.send("running")

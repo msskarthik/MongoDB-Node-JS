@@ -16,8 +16,17 @@ router.post('/',async(req,res) => {
         size: req.body.size
     });
     try {
-        const savedCart = await post.save();
-        res.json(savedCart)
+        const check = await cart.find({brand:req.body.brand,title:req.body.title})
+        console.log(check)
+        if (check.length>=1) {
+           await cart.deleteMany({"brand":check[0].brand})
+            console.log('deleted')
+            const savedCart = await post.save();
+            res.json(savedCart)
+        }else {
+            const savedCart = await post.save();
+            res.json(savedCart)
+        }
     } catch(error) {
         res.json({message: error})
     }
